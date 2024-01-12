@@ -1,0 +1,18 @@
+FROM python:3.11-slim
+
+# set working dir to /api
+WORKDIR /api
+
+# copy server contents into the container at the Working dir [/api]
+COPY ./server .
+
+RUN pip install -r requirements-dev.txt
+
+ENV FLASK_ENV development
+
+# port that flask app is listening on
+EXPOSE 5001
+
+# CMD ["gunicorn", "-b", ":5001", "--capture-output", "--log-level", "debug", "app:app"]
+CMD [ "python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "-m", "app",  "--wait-for-client", "--multiprocess", "-m", "flask", "run", "-h", "0.0.0.0", "-p", "5001" ]
+

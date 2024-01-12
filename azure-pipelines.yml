@@ -1,0 +1,22 @@
+trigger:
+
+- main
+steps:
+  - task: DockerCompose@0
+    inputs:
+      containerregistrytype: 'Azure Container Registry'
+      azureSubscription: 'Azure subscription 1(9aac5b72-ddd8-41e3-8967-a5c25c45163c)'
+      azureContainerRegistry: '{"loginServer":"cs340registry.azurecr.io", "id" : "/subscriptions/9aac5b72-ddd8-41e3-8967-a5c25c45163c/resourceGroups/OSU-CS340/providers/Microsoft.ContainerRegistry/registries/CS340Registry"}'
+      dockerComposeFile: '**/docker-compose.yml'
+      action: 'Build services'
+      includeSourceTags: true
+      includeLatestTag: true
+
+  - task: DockerCompose@0
+    inputs:
+      containerregistrytype: 'Azure Container Registry'
+      azureSubscription: 'Azure subscription 1(9aac5b72-ddd8-41e3-8967-a5c25c45163c)'
+      azureContainerRegistry: '{"loginServer":"cs340registry.azurecr.io", "id" : "/subscriptions/9aac5b72-ddd8-41e3-8967-a5c25c45163c/resourceGroups/OSU-CS340/providers/Microsoft.ContainerRegistry/registries/CS340Registry"}'
+      dockerComposeFile: '**/docker-compose.yml'
+      action: 'Push services'
+      includeLatestTag: true

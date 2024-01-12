@@ -1,0 +1,15 @@
+services:
+  api:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    image: cs340registry.azurecr.io/pokemon-app-api
+  client:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    image: cs340registry.azurecr.io/pokemon-app-client
+    ports:
+      - "3000:80"
